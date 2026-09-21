@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>關東國小 AI 眼鏡觀察課｜手機體驗版</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+  :root{--bg:#f4eee7}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#f4eee7}}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#3a3330;font-family:'Noto Sans TC','PingFang TC',sans-serif}
+  #wrap{width:412px;margin:0 auto;transform-origin:top center}
+  .screen{display:none} .screen.on{display:block}
+  .screen > div:first-child{background:var(--bg)}
+  a{color:inherit}
+  .demo{position:fixed;left:0;right:0;bottom:0;background:#2a2523;color:#ddd;font-size:14px;padding:6px 12px;display:flex;gap:8px;justify-content:center;align-items:center;z-index:30;flex-wrap:wrap}
+  .demo a,.demo button{font:inherit;font-size:14px;border-radius:999px;border:1px solid #777;background:transparent;color:#eee;padding:4px 10px;text-decoration:none}
+  [id^="m-"] .dlg-fix{}
+</style>
+</head>
+<body>
+<div id="wrap">
+<section class="screen" id="S01-Home">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 64px 32px 48px; display: flex; flex-direction: column; align-items: center; gap: 36px;">
+  <div style="width: 180px; height: 180px; border-radius: 48px; background: #ffffff; border: 3px dashed #e0cdb8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #5b5147;">
+    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="14" r="3.5"></circle><circle cx="17" cy="14" r="3.5"></circle><path d="M10.5 14c.9-.8 2.1-.8 3 0"></path><path d="M3.5 13 5.5 7.5c.3-.8 1-1.1 1.8-.9M20.5 13l-2-5.5c-.3-.8-1-1.1-1.8-.9"></path></svg>
+    <div style="font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 33px; letter-spacing: 3px;">LOGO</div>
+  </div>
+  <form style="width: 100%; display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <label for="f-class" style="font-size: 30px; font-weight: 700; color: #2b2722; padding-left: 8px;">班級</label>
+      <input id="f-class" type="text" placeholder="例如：501" style="height: 75px; box-sizing: border-box; border-radius: 30px; border: 3px solid #e0cdb8; background: #ffffff; padding: 0 24px; font-size: 25px; color: #2b2722; font-family: inherit; outline-color: #5b5147;">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <label for="f-seat" style="font-size: 30px; font-weight: 700; color: #2b2722; padding-left: 8px;">座號</label>
+      <input id="f-seat" type="text" inputmode="numeric" placeholder="例如：12" style="height: 75px; box-sizing: border-box; border-radius: 30px; border: 3px solid #e0cdb8; background: #ffffff; padding: 0 24px; font-size: 25px; color: #2b2722; font-family: inherit; outline-color: #5b5147;">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <label for="f-name" style="font-size: 30px; font-weight: 700; color: #2b2722; padding-left: 8px;">姓名</label>
+      <input id="f-name" type="text" placeholder="請輸入姓名" style="height: 75px; box-sizing: border-box; border-radius: 30px; border: 3px solid #e0cdb8; background: #ffffff; padding: 0 24px; font-size: 25px; color: #2b2722; font-family: inherit; outline-color: #5b5147;">
+    </div>
+  </form>
+  <a href="#S02-Connect" style="margin-top: 12px; width: 280px; height: 85px; border-radius: 100px; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; text-decoration: none;">開始課程</a>
+</div>
+</section>
+<section class="screen" id="S02-Connect">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 120px 40px 48px; display: flex; flex-direction: column; align-items: center; gap: 28px;">
+  <h1 style="margin: 0; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">眼鏡連線</h1>
+  <div style="display: inline-flex; align-items: center; gap: 10px; height: 55px; padding: 0 22px 0 18px; border-radius: 999px; background: #ffffff; border: 2px solid #e0cdb8;">
+    <div style="width: 12px; height: 12px; border-radius: 6px; background: #9a93ad;"></div>
+    <div style="font-size: 27px; font-weight: 700; color: #4a4460;">尚未連線</div>
+  </div>
+  <div style="width: 168px; height: 168px; border-radius: 84px; background: #eaddcf; display: flex; align-items: center; justify-content: center; color: #5b5147; margin-top: 8px;">
+    <svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="14" r="3.5"></circle><circle cx="17" cy="14" r="3.5"></circle><path d="M10.5 14c.9-.8 2.1-.8 3 0"></path><path d="M3.5 13 5.5 7.5c.3-.8 1-1.1 1.8-.9M20.5 13l-2-5.5c-.3-.8-1-1.1-1.8-.9"></path></svg>
+  </div>
+  <div style="width: 100%; box-sizing: border-box; background: #ffffff; border-radius: 24px; padding: 20px 24px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 27px; color: #3d3752;"><div style="width: 28px; height: 28px; border-radius: 14px; background: #eaddcf; color: #2b2722; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>戴上眼鏡</div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 27px; color: #3d3752;"><div style="width: 28px; height: 28px; border-radius: 14px; background: #eaddcf; color: #2b2722; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>按住眼鏡左邊按鈕 2 秒鐘</div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 27px; color: #3d3752;"><div style="width: 28px; height: 28px; border-radius: 14px; background: #eaddcf; color: #2b2722; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>開啟眼鏡</div>
+  </div>
+  <a href="#S02-Success" onclick="return connect(this)" style="margin-top: 8px; width: 280px; height: 85px; border-radius: 100px; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; text-decoration: none;">眼鏡連線</a>
+</div>
+</section>
+<section class="screen" id="S02-Success">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 120px 40px 48px; display: flex; flex-direction: column; align-items: center; gap: 28px;">
+  <h1 style="margin: 0; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">眼鏡連線</h1>
+  <div style="display: inline-flex; align-items: center; gap: 10px; height: 55px; padding: 0 22px 0 18px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+    <div style="width: 12px; height: 12px; border-radius: 6px; background: #22a05a;"></div>
+    <div style="font-size: 27px; font-weight: 700; color: #17663b;">已連線</div>
+  </div>
+  <div style="position: relative; width: 168px; height: 168px; border-radius: 84px; background: #eaddcf; display: flex; align-items: center; justify-content: center; color: #5b5147; margin-top: 8px;">
+    <svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="14" r="3.5"></circle><circle cx="17" cy="14" r="3.5"></circle><path d="M10.5 14c.9-.8 2.1-.8 3 0"></path><path d="M3.5 13 5.5 7.5c.3-.8 1-1.1 1.8-.9M20.5 13l-2-5.5c-.3-.8-1-1.1-1.8-.9"></path></svg>
+    <div style="position: absolute; right: 0; bottom: 4px; width: 70px; height: 70px; border-radius: 35px; background: #22a05a; border: 4px solid #ffffff; display: flex; align-items: center; justify-content: center; color: #ffffff;">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7.5"></path></svg>
+    </div>
+  </div>
+  <div style="font-size: 36px; font-weight: 700; color: #17663b; margin-top: 8px;">恭喜！連線成功！</div>
+  <a href="#S03-Courses" style="margin-top: 44px; width: 280px; height: 85px; border-radius: 100px; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; text-decoration: none">下一步</a>
+</div>
+</section>
+<section class="screen" id="S02-Fail">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 120px 40px 48px; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+  <h1 style="margin: 0; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">眼鏡連線</h1>
+  <div style="display: inline-flex; align-items: center; gap: 10px; height: 55px; padding: 0 22px 0 18px; border-radius: 999px; background: #fdecea; border: 2px solid #f1b3ad;">
+    <div style="width: 12px; height: 12px; border-radius: 6px; background: #c9372c;"></div>
+    <div style="font-size: 27px; font-weight: 700; color: #a12a20;">未連線</div>
+  </div>
+  <div style="display: flex; align-items: center; gap: 8px; font-size: 33px; font-weight: 700; color: #b3261e; margin-top: 12px;">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9 9l6 6M15 9l-6 6"></path></svg>
+    連線失敗
+  </div>
+  <div style="width: 100%; box-sizing: border-box; background: #ffffff; border-radius: 24px; padding: 20px 24px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="font-size: 25px; font-weight: 700; color: #5b5147;">請再試一次：</div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 27px; color: #3d3752;"><div style="width: 28px; height: 28px; border-radius: 14px; background: #eaddcf; color: #2b2722; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>戴上眼鏡</div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 27px; color: #3d3752;"><div style="width: 28px; height: 28px; border-radius: 14px; background: #eaddcf; color: #2b2722; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>按住眼鏡左邊按鈕 2 秒鐘</div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 27px; color: #3d3752;"><div style="width: 28px; height: 28px; border-radius: 14px; background: #eaddcf; color: #2b2722; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>開啟眼鏡</div>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 16px; border-radius: 0px">
+    <a href="#S02-Connect" style="width: 280px; height: 85px; border-radius: 100px; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; text-decoration: none;">重新連線</a>
+    <a href="#S02-Skip" style="width: 280px; height: 75px; box-sizing: border-box; border-radius: 100px; background: #ffffff; border: 3px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 32px; letter-spacing: 3px; text-decoration: none;">略過</a>
+  </div>
+</div>
+</section>
+<section class="screen" id="S02-Skip">
+<div style="position: relative; width: 412px; height: 917px; overflow: hidden; background: #f4eee7;">
+  <div aria-hidden="true" style="width: 412px; min-height: 917px; box-sizing: border-box; padding: 120px 40px 48px; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+    <div style="font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 60px; letter-spacing: 4px; color: #2b2722;">眼鏡連線</div>
+    <div style="display: inline-flex; align-items: center; gap: 10px; height: 55px; padding: 0 22px 0 18px; border-radius: 999px; background: #fdecea; border: 2px solid #f1b3ad;">
+      <div style="width: 12px; height: 12px; border-radius: 6px; background: #c9372c;"></div>
+      <div style="font-size: 27px; font-weight: 700; color: #a12a20;">未連線</div>
+    </div>
+    <div style="font-size: 33px; font-weight: 700; color: #b3261e; margin-top: 12px;">連線失敗</div>
+    <div style="width: 100%; height: 160px; box-sizing: border-box; background: #ffffff; border-radius: 24px;"></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 16px;">
+      <div style="width: 280px; height: 85px; border-radius: 34px; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 42px;">重新連線</div>
+      <div style="width: 280px; height: 75px; box-sizing: border-box; border-radius: 100px; background: #ffffff; border: 3px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 32px;">略過</div>
+    </div>
+  </div>
+  <div style="position: absolute; left: 0; top: 0; width: 412px; height: 917px; background: rgba(34, 27, 54, 0.55); display: flex; align-items: center; justify-content: center; padding: 32px; box-sizing: border-box;">
+    <div role="dialog" aria-modal="true" aria-labelledby="skip-title" style="width: 100%; box-sizing: border-box; background: #ffffff; border-radius: 32px; padding: 32px 28px 28px; display: flex; flex-direction: column; align-items: center; gap: 16px; box-shadow: 0 16px 40px rgba(34, 27, 54, 0.25);">
+      <div style="width: 100px; height: 100px; border-radius: 50px; background: #fff3dc; color: #a15c00; display: flex; align-items: center; justify-content: center;">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9.5v4.5"></path><path d="M12 17.2h.01"></path></svg>
+      </div>
+      <h2 id="skip-title" style="margin: 0; font-size: 36px; font-weight: 700; color: #2b2722;">確定要略過嗎？</h2>
+      <p style="margin: 0; font-size: 27px; line-height: 1.6; color: #4a4460; text-align: center;"><span style="color: rgb(95, 88, 78); font-size: 22px">部分功能將無法使用</span></p>
+      <div style="width: 100%; display: flex; gap: 12px; margin-top: 8px;">
+        <a href="#S02-Fail" style="flex-grow: 1; flex-basis: 0; height: 70px; box-sizing: border-box; border-radius: 28px; background: #ffffff; border: 3px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; text-decoration: none;">取消</a>
+        <a href="#S03-Courses" style="flex-grow: 1; flex-basis: 0; height: 70px; border-radius: 28px; background: #9CC96A; color: #2b2722; box-shadow: 0 5px 0 #759750; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; text-decoration: none;">確認</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section class="screen" id="S03-Empty">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 28px;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <h1 style="margin: 16px 0 0; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">選擇課程</h1>
+  <a href="#S04-Code" style="height: 116px; box-sizing: border-box; border-radius: 28px; border: 3px dashed #e0cdb8; background: rgba(255, 255, 255, 0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #5b5147; text-decoration: none;">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+    <span style="font-size: 33px; font-weight: 700;">新增課程</span>
+  </a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #5b5147; padding-bottom: 20px;">
+    <div style="width: 120px; height: 120px; border-radius: 60px; background: #eaddcf; display: flex; align-items: center; justify-content: center;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"></path><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"></path></svg>
+    </div>
+    <div style="font-size: 30px; font-weight: 700; color: #2b2722;">還沒有課程喔</div>
+    <div style="font-size: 25px; color: #5e5873;">按上面的「新增課程」開始吧！</div>
+  </div>
+  <button type="button" style="margin: 0 auto; width: 280px; height: 85px; box-sizing: border-box; border-radius: 100px; border: none; background: #8B6A4E; color: #ffffff; box-shadow: 0 6px 0 #5C4432; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; line-height: 1.1; display: flex; align-items: center; justify-content: center; text-align: center; cursor: pointer; flex-shrink: 0;">開始使用<br>AI眼鏡</button>
+</div>
+</section>
+<section class="screen" id="S04-Code">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 24px;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <label for="course-code" style="margin-top: 16px; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 60px; letter-spacing: 4px; color: #2b2722;">課程代碼</label>
+  <div style="height: 85px; box-sizing: border-box; border-radius: 34px; border: 3px solid #e0cdb8; background: #ffffff; display: flex; align-items: center; padding: 0 8px 0 24px; gap: 8px;">
+    <input id="course-code" type="text" readonly="" value="" id="d-code" placeholder="請輸入或掃描代碼" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: inherit; font-size: 25px; font-weight: 700; letter-spacing: 9px; color: #2b2722; text-align: left">
+    <button type="button" aria-label="掃描 QR Code" style="width: 60px; height: 60px; flex-shrink: 0; border-radius: 16px; padding: 0; border: none; background: #9CC96A; color: #2b2722; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"></path><path d="M8 12h8"></path></svg>
+    </button>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 4px 28px 0;">
+    <button type="button" onclick="key('1')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">1</button>
+<button type="button" onclick="key('2')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">2</button>
+<button type="button" onclick="key('3')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">3</button>
+<button type="button" onclick="key('4')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">4</button>
+<button type="button" onclick="key('5')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">5</button>
+<button type="button" onclick="key('6')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">6</button>
+<button type="button" onclick="key('7')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">7</button>
+<button type="button" onclick="key('8')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">8</button>
+<button type="button" onclick="key('9')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">9</button>
+
+    <div></div>
+    <button type="button" onclick="key('0')" style="height: 84px; border-radius: 22px; background: #ffffff; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #eaddcf; font-family: inherit; font-size: 51px; font-weight: 700; color: #2b2722; cursor: pointer;">0</button>
+    <button type="button" aria-label="刪除一個字" onclick="key('back')" style="height: 84px; border-radius: 22px; background: #eaddcf; border: 2px solid #e0cdb8; box-shadow: 0 5px 0 #e0cdb8; color: #2b2722; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h10.5A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5H9l-6-7z"></path><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"></path></svg>
+    </button>
+  </div>
+  <a href="#S03-Courses" style="align-self: center; margin-top: 12px; width: 280px; height: 85px; border-radius: 100px; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; text-decoration: none;">確認</a>
+</div>
+</section>
+<section class="screen" id="S03-Courses">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 24px;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <h1 style="margin: 16px 0 4px; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">選擇課程</h1>
+<div id="d-courses" style="display: flex; flex-direction: column; gap: 24px;"></div>
+  <a href="#S04-Code" style="height: 116px; box-sizing: border-box; border-radius: 28px; border: 3px dashed #e0cdb8; background: rgba(255, 255, 255, 0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #5b5147; text-decoration: none;">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+    <span style="font-size: 33px; font-weight: 700;">新增課程</span>
+  </a>
+  <div style="text-align: center; font-size: 22px; color: #7a6f63;">兩堂課用同一個 App，只是老師設定的題目不同</div>
+  <button type="button" style="margin: auto auto 0; width: 280px; height: 85px; box-sizing: border-box; border-radius: 100px; border: none; background: #8B6A4E; color: #ffffff; box-shadow: 0 6px 0 #5C4432; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; line-height: 1.1; display: flex; align-items: center; justify-content: center; text-align: center; cursor: pointer; flex-shrink: 0;">開始使用<br>AI眼鏡</button>
+</div>
+</section>
+<section class="screen" id="Main">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 20px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <h1 style="margin: 8px 0 0; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">今天的任務</h1>
+  <div style="background: #ffffff; border-radius: 24px; border: 3px solid #e0cdb8; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="font-size: 26px; font-weight: 700; color: #5e5873;"><span id="d-sub">六年級・岩石與礦物</span></div>
+    <div style="font-size: 33px; font-weight: 700; line-height: 1.4; color: #2b2722;"><span id="d-q">這顆石頭是什麼樣子？</span></div>
+  </div>
+  <div style="font-size: 30px; font-weight: 700; color: #2b2722;">要注意觀察的地方</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;" id="d-tags"></div>
+  <div style="border: 3px dashed #e0cdb8; border-radius: 24px; padding: 14px 18px; font-size: 25px; color: #2b2722;">✨ AI 小助手只會問問題，不會說答案。</div>
+  
+  <a href="#K02-Camera" style="width: 280px; height: 85px; box-sizing: border-box; margin: 50px auto 0; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;">去觀察</a>
+</div>
+</section>
+<section class="screen" id="K02-Camera">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 20px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-around; padding: 0 20px;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #9CC96A; border: 2px solid #9CC96A; color: #2b2722;">1</div><div style="font-size: 25px; font-weight: 700; color: #2b2722;">拍照</div></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #9a93ad;">2</div><div style="font-size: 25px; font-weight: 500; color: #9a93ad;">問答</div></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #9a93ad;">3</div><div style="font-size: 25px; font-weight: 500; color: #9a93ad;">發現</div></div>
+  </div>
+  <div style="text-align: center; font-size: 30px; font-weight: 700; color: #2b2722;">戴好眼鏡<br>看向要觀察的東西</div>
+  <div style="height: 260px; border-radius: 28px; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 3px #e0cdb8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; overflow: hidden;" id="d-photo">
+    <div style="font-size: 25px; font-weight: 700; color: #5b5147; text-align: center;">按下面的「拍照」<br>會打開手機相機</div>
+  </div>
+<input type="file" accept="image/*" capture="environment" id="d-file" style="display:none" onchange="gotPhoto(this)">
+  <div style="background: #ffffff; border: 3px solid #e0cdb8; border-radius: 24px; padding: 12px 18px; font-size: 22px; color: #2b2722;">✓ 旁邊同學的臉會自動模糊</div>
+  
+  <button type="button" style="width: 280px; height: 75px; box-sizing: border-box; margin: 50px auto 0; border-radius: 100px; border: 3px solid #e0cdb8; background: #ffffff; color: #5b5147; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 32px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; flex-shrink: 0;" onclick="document.getElementById('d-file').click()">拍照 / 重拍</button>
+  <a href="#K03-Chat" id="d-use" onclick="return usePhoto()" style="width: 280px; height: 85px; box-sizing: border-box; margin: 0 auto; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;">用這張</a>
+</div>
+</section>
+<section class="screen" id="K03-Chat">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 20px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-around; padding: 0 20px;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #eaddcf; border: 2px solid #e0cdb8; color: #2b2722;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></div><div style="font-size: 25px; font-weight: 500; color: #5b5147;">拍照</div></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #9CC96A; border: 2px solid #9CC96A; color: #2b2722;">2</div><div style="font-size: 25px; font-weight: 700; color: #2b2722;">問答</div></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #9a93ad;">3</div><div style="font-size: 25px; font-weight: 500; color: #9a93ad;">發現</div></div>
+  </div>
+  <div style="display: flex; align-items: center; gap: 14px;">
+    
+    <div style="flex-grow: 1; font-size: 27px; font-weight: 700; color: #2b2722;"><span id="d-chatsub">仔細觀察石頭</span></div>
+    <div id="d-hint" style="font-size: 22px; color: #7a6f63; white-space: nowrap;"></div>
+    
+  </div>
+  <div style="flex-grow: 1; min-height: 0; background: #ffffff; border-radius: 24px; border: 3px solid #e0cdb8; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; height: 360px" id="d-chat">
+</div>
+  
+  <div style="display: flex; align-items: center; gap: 12px; height: 75px; padding: 0 8px 0 24px; border-radius: 30px; background: #ffffff; border: 3px solid #e0cdb8;">
+    <input id="d-ans" placeholder="用說的或用打的…" onkeydown="if(event.key==='Enter')send()" style="flex-grow: 1; font-size: 27px; color: #9a93ad; border: none; outline: none; background: transparent; font-family: inherit; min-width: 0; color: #2b2722;">
+    <button type="button" aria-label="打字" style="width: 55px; height: 55px; border-radius: 27px; border: 2px solid #e0cdb8; background: #ffffff; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;" onclick="document.getElementById('d-ans').focus()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"></rect><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"></path></svg></button>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+    <div style="width: 96px;"></div>
+    <button type="button" aria-label="按住說話" style="width: 110px; height: 105px; border-radius: 52px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0" onclick="voice()"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
+    <a href="#K04-Result" id="d-done" onclick="return fillResult()" style="width: 96px; height: 70px; border-radius: 28px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 25px; font-weight: 700; line-height: 1.2; text-decoration: none; background: #eaddcf; color: #5b5147;">觀察<br>完了</a>
+  </div>
+</div>
+</section>
+<section class="screen" id="K04-Result">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 12px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-around; padding: 0 20px;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #eaddcf; border: 2px solid #e0cdb8; color: #2b2722;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></div><div style="font-size: 25px; font-weight: 500; color: #5b5147;">拍照</div></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #eaddcf; border: 2px solid #e0cdb8; color: #2b2722;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></div><div style="font-size: 25px; font-weight: 500; color: #5b5147;">問答</div></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1 1 0; min-width: 0;"><div style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; flex-shrink: 0; background: #9CC96A; border: 2px solid #9CC96A; color: #2b2722;">3</div><div style="font-size: 25px; font-weight: 700; color: #2b2722;">發現</div></div>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 2px; color: #2b2722; white-space: nowrap;">我的觀察</div>
+    <div style="font-size: 25px; font-weight: 700; color: #5e5873;"><span id="d-rsub">六年級・岩石</span></div>
+  </div>
+  <div style="height: 160px; flex-shrink: 0; border-radius: 28px; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 3px #e0cdb8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; position: relative; overflow: hidden;"><img id="d-rphoto" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none">
+    <div style="position: absolute; left: 14px; top: 12px; padding: 4px 14px; border-radius: 999px; background: #9CC96A; font-size: 25px; font-weight: 700; color: #2b2722;"><span id="d-rname">金剛石</span></div>
+    <a href="#K02-Camera" style="position: absolute; right: 14px; bottom: 12px; font-size: 25px; font-weight: 700; color: #5b5147; text-decoration: underline;">重拍</a>
+  </div>
+  <div style="flex-shrink: 0; background: #ffffff; border-radius: 24px; border: 3px solid #e0cdb8; overflow: hidden; display: flex; flex-direction: column;">
+<div id="d-table"></div>
+  </div>
+  <div style="text-align: center; font-size: 22px; color: #7a6f63;">格子裡是你剛剛說的話，可以改</div>
+  <a href="#K06-Confirm" onclick="return openMask('m-confirm')" style="width: 280px; height: 85px; box-sizing: border-box; margin: 40px auto 0; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;">送出給老師</a>
+</div>
+</section>
+<section class="screen" id="K07-Done">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 20px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="flex-grow: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center;">
+    <div style="width: 168px; height: 168px; border-radius: 84px; background: #e6f6ec; border: 4px solid #9fd8b4; display: flex; align-items: center; justify-content: center;"><svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="#22a05a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></div>
+  <h1 style="margin: 0; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">送出了！</h1>
+    <div style="font-size: 30px; line-height: 1.6; color: #3d3752;">回教室吧！老師會把大家的發現放到大螢幕上。</div>
+  </div>
+  <button type="button" style="width: 280px; height: 85px; box-sizing: border-box; margin: 50px auto 0; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;" onclick="location.hash='#S01-Home'">回首頁</button>
+</div>
+</section>
+<section class="screen" id="K07-Group">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 20px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="flex-grow: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center;">
+    <div style="width: 168px; height: 168px; border-radius: 84px; background: #e6f6ec; border: 4px solid #9fd8b4; display: flex; align-items: center; justify-content: center;"><svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="#22a05a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></div>
+  <h1 style="margin: 0; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 60px; letter-spacing: 4px; color: #2b2722;">送出了！</h1>
+    <div style="font-size: 30px; line-height: 1.6; color: #3d3752;">老師開了小組討論，<br>去找你的組員吧！</div>
+  </div>
+  <a href="#G02-Leader" onclick="fillGroup()" style="width: 280px; height: 85px; box-sizing: border-box; margin: 50px auto 0; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;">去小組討論</a>
+  <button type="button" style="width: 280px; height: 75px; box-sizing: border-box; margin: 0 auto; border-radius: 100px; border: 3px solid #e0cdb8; background: #ffffff; color: #5b5147; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 32px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;" onclick="location.hash='#S01-Home'">回首頁</button>
+</div>
+</section>
+<section class="screen" id="G01-Member">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 12px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 2px; color: #2b2722; white-space: nowrap;">我的觀察</div>
+    <div style="font-size: 25px; font-weight: 700; color: #5e5873;">第 3 組</div>
+  </div>
+  <div style="height: 160px; flex-shrink: 0; border-radius: 28px; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 3px #e0cdb8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; position: relative;">
+    <svg width="96" height="96" viewBox="0 0 64 64" fill="none" stroke="#5b5147" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 26l10-10h12l10 10-16 22z"></path><path d="M16 26h32M26 16l6 10 6-10M32 48l-6-22M32 48l6-22"></path></svg>
+    <div style="position: absolute; left: 14px; top: 12px; padding: 4px 14px; border-radius: 999px; background: #9CC96A; font-size: 25px; font-weight: 700; color: #2b2722;">金剛石</div>
+  </div>
+  <div style="flex-shrink: 0; background: #ffffff; border-radius: 24px; border: 3px solid #e0cdb8; overflow: hidden; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 2px 18px; border-bottom: 2px solid #f4eee7;"><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">顏色</div><input type="text" value="金色" placeholder="" aria-label="顏色" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;"></div>
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 2px 18px; border-bottom: 2px solid #f4eee7;"><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">摸起來</div><input type="text" value="溫溫的" placeholder="" aria-label="摸起來" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;"></div>
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 2px 18px; border-bottom: 2px solid #f4eee7;"><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">觸感</div><input type="text" value="滑滑的" placeholder="" aria-label="觸感" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;"></div>
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 2px 18px; "><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">其他觀察</div><input type="text" value="" placeholder="（沒寫）" aria-label="其他觀察" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #9a93ad;"></div>
+  </div>
+  <div style="margin-top: 50px; padding: 12px 18px; border-radius: 24px; background: #eaddcf; display: flex; align-items: center; gap: 12px;">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5147" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3v4a5 5 0 0 0 10 0V3M7 21v-4a5 5 0 0 1 10 0v4"></path></svg>
+    <div style="font-size: 25px; font-weight: 700; color: #2b2722;">已經交給老師，等組長整理</div>
+  </div>
+</div>
+</section>
+<section class="screen" id="G02-Leader">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 12px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 2px; color: #2b2722; white-space: nowrap;">組長整理</div>
+    <div style="font-size: 25px; font-weight: 700; color: #5e5873;">已交 5 / 8 人</div>
+  </div>
+  <div style="font-size: 25px; font-weight: 700; color: #2b2722;">選照片</div>
+  <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 4px 6px;">
+<div id="d-thumbs" style="display:contents"></div>
+  </div>
+  <div style="font-size: 25px; font-weight: 700; color: #2b2722;">大家的觀察</div>
+  <div style="flex-grow: 1; min-height: 0; overflow: hidden; background: #ffffff; border-radius: 24px; border: 3px solid #e0cdb8; padding: 6px 18px;">
+<div id="d-mlist" style="display:contents"></div>
+  </div>
+  <a href="#G03-Summary" style="width: 280px; height: 85px; box-sizing: border-box; margin: 50px auto 0; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;">去寫小組結論</a>
+</div>
+</section>
+<section class="screen" id="G03-Summary">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 12px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 2px; color: #2b2722; white-space: nowrap;">小組結論</div>
+    <div style="font-size: 25px; font-weight: 700; color: #5e5873;">第 3 組</div>
+  </div>
+  <div style="display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 20px; background: #ffffff; border: 3px solid #e0cdb8;">
+    <div style="position: relative; width: 64px; height: 64px; flex-shrink: 0; border-radius: 16px; background: #eaddcf; display: flex; align-items: center; justify-content: center;"><svg width="40" height="40" viewBox="0 0 64 64" fill="none" stroke="#5b5147" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 26l10-10h12l10 10-16 22z"></path><path d="M16 26h32M26 16l6 10 6-10M32 48l-6-22M32 48l6-22"></path></svg></div>
+    <div style="flex-grow: 1; font-size: 25px; font-weight: 700; color: #2b2722;"><span id="d-gphoto">用小明的照片</span></div>
+    <a href="#G02-Leader" style="font-size: 25px; font-weight: 700; color: #5b5147; text-decoration: underline;">改</a>
+  </div>
+  <div style="font-size: 25px; font-weight: 700; color: #2b2722;">我們這組的發現</div>
+  <div style="flex-shrink: 0; background: #ffffff; border-radius: 24px; border: 3px solid #e0cdb8; overflow: hidden; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 2px 18px; border-bottom: 2px solid #f4eee7;"><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">看起來</div><input type="text" value="" placeholder="大家看到的" aria-label="看起來" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;"></div>
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 2px 18px; border-bottom: 2px solid #f4eee7;"><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">摸起來</div><input type="text" value="" placeholder="大家摸到的" aria-label="摸起來" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;"></div>
+    <div style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 2px 18px; "><div style="width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;">我們覺得</div><input type="text" value="" placeholder="小組的想法" aria-label="我們覺得" style="flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;"></div>
+  </div>
+  <div style="text-align: center; font-size: 22px; color: #7a6f63;">寫到一半可以回去看，草稿會自己存</div>
+  <a href="#G02-Leader" style="width: 280px; height: 75px; box-sizing: border-box; margin: 0 auto; border-radius: 100px; border: 3px solid #e0cdb8; background: #ffffff; color: #5b5147; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 32px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; flex-shrink: 0;">回上一頁</a>
+  <a href="#G04-Confirm" onclick="return openMask('m-gconfirm')" style="width: 280px; height: 85px; box-sizing: border-box; margin: 0 auto; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;">送出給老師</a>
+</div>
+</section>
+<section class="screen" id="G05-Done">
+<div style="width: 412px; min-height: 917px; box-sizing: border-box; background: #f4eee7; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 20px; position: relative;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px 0 14px; border-radius: 999px; background: #e6f6ec; border: 2px solid #9fd8b4;">
+      <div style="width: 10px; height: 10px; border-radius: 5px; background: #22a05a;"></div>
+      <div style="font-size: 25px; font-weight: 700; color: #17663b;">眼鏡已連線</div>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <button type="button" aria-label="使用者頭像" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"></path></svg>
+      </button>
+      <button type="button" aria-label="設定" style="width: 60px; height: 60px; border-radius: 30px; padding: 0; background: #ffffff; border: 2px solid #e0cdb8; color: #5b5147; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div style="flex-grow: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center;">
+    <div style="width: 168px; height: 168px; border-radius: 84px; background: #e6f6ec; border: 4px solid #9fd8b4; display: flex; align-items: center; justify-content: center;"><svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="#22a05a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></div>
+  <h1 style="margin: 0; text-align: center; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 48px; line-height: 1.3; letter-spacing: 4px; color: #2b2722;">小組結論<br>送出了！</h1>
+    <div style="font-size: 30px; line-height: 1.6; color: #3d3752;">老師會把大家的發現放到大螢幕上。</div>
+  </div>
+  <button type="button" style="width: 280px; height: 85px; box-sizing: border-box; margin: 50px auto 0; border-radius: 100px; border: none; background: #9CC96A; color: #2b2722; box-shadow: 0 6px 0 #759750; font-family: 'Huninn', 'Noto Sans TC', sans-serif; font-size: 36px; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; cursor: pointer; flex-shrink: 0;" onclick="location.hash='#S01-Home'">回首頁</button>
+</div>
+</section>
+
+</div>
+  <div id="m-confirm" style="position: fixed; inset: 0; z-index: 20; background: rgba(34, 27, 54, 0.55);  align-items: center; justify-content: center; padding: 0 24px; box-sizing: border-box; display: none;">
+    <div style="width: 100%; background: #ffffff; border-radius: 32px; padding: 28px 22px 24px; box-shadow: 0 16px 40px rgba(34,27,54,0.25); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+      <div style="width: 100px; height: 100px; border-radius: 50px; background: #fff3dc; display: flex; align-items: center; justify-content: center;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a15c00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3L2 20h20z"></path><path d="M12 10v4M12 17h.01"></path></svg></div>
+      <div style="font-size: 33px; font-weight: 700; color: #2b2722;">確定要送出嗎？</div>
+      <div style="font-size: 25px; color: #3d3752; line-height: 1.5;">送出後就不能再改了。</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-top: 6px;"><a href="#K04-Result" onclick="return closeMask()" style="min-width: 0px; height: 72px; box-sizing: border-box; border-radius: 100px; border: 3px solid rgb(224, 205, 184); background: rgb(255, 255, 255); color: rgb(91, 81, 71); font-family: Huninn, &quot;Noto Sans TC&quot;, sans-serif; font-size: 28px; letter-spacing: 2px; white-space: nowrap; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer">取消</a>
+        <a href="#K07-Done" onclick="return submitAll()" style="min-width: 0px; height: 72px; box-sizing: border-box; border-radius: 100px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: rgb(156, 201, 106); color: rgb(43, 39, 34); box-shadow: rgb(117, 151, 80) 0px 5px 0px; font-family: Huninn, &quot;Noto Sans TC&quot;, sans-serif; font-size: 28px; letter-spacing: 2px; white-space: nowrap; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer">送出</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-gconfirm" style="position: fixed; inset: 0; z-index: 20; background: rgba(34, 27, 54, 0.55);  align-items: center; justify-content: center; padding: 0 24px; box-sizing: border-box; display: none;">
+    <div style="width: 100%; background: #ffffff; border-radius: 32px; padding: 28px 22px 24px; box-shadow: 0 16px 40px rgba(34,27,54,0.25); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+      <div style="width: 100px; height: 100px; border-radius: 50px; background: #fff3dc; display: flex; align-items: center; justify-content: center;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a15c00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3L2 20h20z"></path><path d="M12 10v4M12 17h.01"></path></svg></div>
+      <div style="font-size: 33px; font-weight: 700; color: #2b2722;">確定要送出嗎？</div>
+      <div style="font-size: 25px; color: #3d3752; line-height: 1.5;">送出後全組都不能再改了。</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-top: 6px;"><a href="#G03-Summary" onclick="return closeMask()" style="min-width: 0px; height: 72px; box-sizing: border-box; border-radius: 100px; border: 3px solid rgb(224, 205, 184); background: rgb(255, 255, 255); color: rgb(91, 81, 71); font-family: Huninn, &quot;Noto Sans TC&quot;, sans-serif; font-size: 28px; letter-spacing: 2px; white-space: nowrap; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer">取消</a>
+        <a href="#G05-Done" onclick="closeMask()" style="min-width: 0px; height: 72px; box-sizing: border-box; border-radius: 100px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: rgb(156, 201, 106); color: rgb(43, 39, 34); box-shadow: rgb(117, 151, 80) 0px 5px 0px; font-family: Huninn, &quot;Noto Sans TC&quot;, sans-serif; font-size: 28px; letter-spacing: 2px; white-space: nowrap; display: flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer">送出</a>
+      </div>
+    </div>
+  </div>
+
+<div class="demo">體驗版 <button onclick="location.hash='#S01-Home'">重來</button></div>
+<script>
+const TPL={"course": "  <a href=\"#Main\" onclick=\"pick('${k}')\" style=\"height: 116px; box-sizing: border-box; border-radius: 28px; border: 3px solid #e0cdb8; background: #ffffff; box-shadow: 0 6px 0 #eaddcf; padding: 0 16px 0 18px; display: flex; align-items: center; gap: 16px; text-align: left; cursor: pointer; text-decoration: none;\">\n    <div style=\"width: 72px; height: 72px; flex-shrink: 0; border-radius: 50px; background: #eaddcf; color: #2b2722; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; line-height: 1.3; text-align: center; white-space: pre-line\">${c.status}</div>\n    <div style=\"flex-grow: 1; display: flex; flex-direction: column; gap: 4px;\">\n      <div style=\"font-size: 33px; font-weight: 700; color: #2b2722;\">${c.name}</div>\n      <div style=\"font-size: 26px; color: #5e5873;\">${c.sub}</div>\n    </div>\n    <svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#5b5147\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 5l7 7-7 7\"></path></svg>\n  </a>\n", "tag": "<span style=\"display: inline-flex; align-items: center; height: 55px; padding: 0 18px; border-radius: 22px; background: #eaddcf; color: #2b2722; font-size: 27px; font-weight: 700;\">${a}</span>", "ai": "    <div style=\"display: flex; align-items: flex-end; gap: 8px;\">\n      <div style=\"width: 36px; height: 36px; border-radius: 18px; background: #9CC96A; display: flex; align-items: center; justify-content: center; flex-shrink: 0;\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#2b2722\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"></path></svg></div>\n      <div style=\"max-width: 250px; padding: 8px 14px; border-radius: 20px 20px 20px 6px; background: #eaddcf; color: #2b2722; font-size: 27px; line-height: 1.5;\">${t}</div>\n    </div>\n", "me": "    <div style=\"display: flex; flex-direction: column; align-items: flex-end;\">\n      <div style=\"max-width: 250px; padding: 8px 14px; border-radius: 20px 20px 6px 20px; background: #ffffff; border: 2px solid #e0cdb8; color: #2b2722; font-size: 25px; line-height: 1.5;\">${t}</div>\n    </div>\n", "row": "    <div style=\"display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 2px 18px; border-bottom: 2px solid #f4eee7;\"><div style=\"width: 110px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;\">${k}</div><input type=\"text\" value=\"${v}\" placeholder=\"\" aria-label=\"${k}\" oninput=\"answers['${k}']=this.value\" style=\"flex-grow: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; font-size: 25px; color: #2b2722;\"></div>\n", "tile": "    <button type=\"button\" aria-label=\"選 ${n} 的照片\" onclick=\"selThumb(this)\" style=\"position: relative; width: 108px; height: 108px; flex-shrink: 0; border-radius: 22px; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 4px #22a05a; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer;\">${img}<div style=\"position: absolute; right: 8px; top: 8px; width: 36px; height: 36px; border-radius: 18px; background: #22a05a; border: 3px solid #ffffff; display: flex; align-items: center; justify-content: center;\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12l5 5 9-10\"></path></svg></div><div style=\"position: absolute; left: 0; right: 0; bottom: 0; padding: 2px 0; border-radius: 0 0 19px 19px; background: rgba(255,255,255,0.85); font-size: 25px; font-weight: 700; color: #2b2722;\">${n}</div></button>\n", "tile_off": "    <button type=\"button\" aria-label=\"選 ${n} 的照片\" onclick=\"selThumb(this)\" style=\"position: relative; width: 108px; height: 108px; flex-shrink: 0; border-radius: 22px; background: #eaddcf; border: 3px solid #ffffff; box-shadow: 0 0 0 3px #e0cdb8; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer;\">${img}<div style=\"position: absolute; right: 8px; top: 8px; width: 36px; height: 36px; border-radius: 18px; background: #ffffff; border: 3px solid #e0cdb8;\"></div><div style=\"position: absolute; left: 0; right: 0; bottom: 0; padding: 2px 0; border-radius: 0 0 19px 19px; background: rgba(255,255,255,0.85); font-size: 25px; font-weight: 700; color: #2b2722;\">${n}</div></button>\n", "line": "    <div style=\"display: flex; gap: 10px; padding: 8px 0; border-bottom: 2px solid #f4eee7;\"><div style=\"width: 64px; flex-shrink: 0; font-size: 25px; font-weight: 700; color: #5b5147;\">${n}</div><div style=\"font-size: 25px; line-height: 1.4; color: #2b2722;\">${t}</div></div>\n"};
+const COURSES={
+  rock:{name:'岩石觀察',sub:'六年級・岩石與礦物',status:'未\n開始',group:true,q:'這顆石頭是什麼樣子？用你的手和眼睛仔細觀察。',chatsub:'仔細觀察石頭',sample:'金剛石',
+    aspects:[{k:'顏色',ask:'先看看它，是什麼顏色？有沒有不同顏色的地方？'},{k:'摸起來',ask:'摸摸看，是冰冰的還是溫溫的？'},{k:'觸感',ask:'用手指滑過表面，是滑滑的還是粗粗的？'},{k:'其他觀察',ask:'還有沒有你注意到、別人可能沒發現的地方？'}],
+    members:[['小華','金色、冰冰的、滑滑的，會發亮'],['小美','有點黃、溫溫的、硬硬的'],['小強','金色、溫溫的、滑滑的']]},
+  plant:{name:'校園植物',sub:'五年級・植物的家',status:'未\n開始',group:false,q:'這棵植物住在什麼樣的地方？它需要什麼才能長大？',chatsub:'仔細觀察植物',sample:'校園植物',
+    aspects:[{k:'葉子',ask:'看看它的葉子，是什麼形狀、什麼顏色？'},{k:'陽光',ask:'它旁邊有沒有東西擋住太陽？你猜它一天曬得到多久？'},{k:'土',ask:'摸摸看旁邊的土，是乾的還是濕的？'},{k:'我的猜想',ask:'它為什麼會長在這裡？說說你的猜想。'}],
+    members:[]}
+};
+let course=COURSES.rock, photoURL='', answers={}, i=0, code='';
+const $=id=>document.getElementById(id);
+const fill=(t,o)=>t.replace(/\$\{([\w.]+)\}/g,(m,k)=>k.split('.').reduce((a,b)=>a?.[b],o)??'');
+function show(){closeMask();const h=(location.hash||'#S01-Home').slice(1);document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===h));window.scrollTo(0,0)}
+addEventListener('hashchange',show);show();
+function scale(){const s=Math.min(1,innerWidth/412);const w=$('wrap');w.style.transform=`scale(${s})`;w.style.height=(w.scrollHeight*s)+'px'}
+addEventListener('resize',scale);addEventListener('hashchange',()=>setTimeout(scale,0));setTimeout(scale,0);
+// 課程
+$('d-courses').innerHTML=Object.entries(COURSES).map(([k,c])=>fill(TPL.course,{k,c})).join('');
+function pick(k){course=COURSES[k];answers={};i=0;photoURL='';
+  $('d-sub').textContent=course.sub;$('d-q').textContent=course.q;$('d-tags').innerHTML=course.aspects.map(a=>fill(TPL.tag,{a:a.k})).join('');
+  $('d-photo').innerHTML='<div style="font-size:25px;font-weight:700;color:#5b5147;text-align:center">按下面的「拍照」<br>會打開手機相機</div>';setUse(false)}
+function setUse(on){const b=$('d-use');b.style.opacity=on?1:.45;b.style.pointerEvents=on?'auto':'none'}
+function usePhoto(){startChat();return true}
+function myName(){return ($('f-name').value||'').trim()||'我'}
+pick('rock');setUse(false);
+// 眼鏡連線（模擬）
+function connect(a){a.textContent='連線中…';setTimeout(()=>{location.hash='#S02-Success';a.textContent='眼鏡連線'},1200);return false}
+// 課程代碼
+function key(k){if(k==='back')code=code.slice(0,-1);else if(code.length<8)code+=k;$('d-code').value=code}
+// 拍照
+function gotPhoto(inp){const f=inp.files[0];if(!f)return;photoURL=URL.createObjectURL(f);$('d-photo').innerHTML=`<img src="${photoURL}" style="width:100%;height:100%;object-fit:cover" alt="">`;setUse(true)}
+// AI 問答
+function startChat(){$('d-chat').innerHTML='';i=0;$('d-chatsub').textContent=course.chatsub;$('d-done').style.opacity=.45;$('d-done').style.pointerEvents='none';setTimeout(ask,300)}
+function bubble(who,t){$('d-chat').insertAdjacentHTML('beforeend',fill(TPL[who],{t}));$('d-chat').scrollTop=1e9}
+function ask(){bubble('ai',course.aspects[i].ask);$('d-hint').textContent=`還有 ${course.aspects.length-i} 題`}
+function send(){const t=$('d-ans').value.trim();if(!t)return;$('d-ans').value='';bubble('me',t);const a=course.aspects[i];answers[a.k]=t;i++;
+  const enc=[`你說「${t}」，你注意到${a.k}了！`,`「${t}」，這是很好的觀察。`,`你把${a.k}說出來了，很棒。`][i%3];
+  setTimeout(()=>{if(i<course.aspects.length){bubble('ai',enc);setTimeout(ask,500)}else{bubble('ai',enc+' 每個地方都看過了，可以按「觀察完了」。');$('d-hint').textContent='';$('d-done').style.opacity=1;$('d-done').style.pointerEvents='auto'}},500)}
+function voice(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('這支手機的瀏覽器不支援語音，先用打字');return}const r=new SR();r.lang='zh-TW';r.onresult=e=>{$('d-ans').value=e.results[0][0].transcript;send()};r.onerror=()=>alert('沒聽清楚，再說一次');r.start()}
+// 我的觀察
+function fillResult(){$('d-rsub').textContent=course.sub;$('d-rname').textContent=course.sample;const im=$('d-rphoto');if(photoURL){im.src=photoURL;im.style.display='block'}else im.style.display='none';
+  $('d-table').innerHTML=course.aspects.map(a=>fill(TPL.row,{k:a.k,v:answers[a.k]||''})).join('');return true}
+function openMask(id){const m=$(id);m.style.display='flex';m.style.alignItems='center';m.style.justifyContent='center';return false}
+function closeMask(){document.querySelectorAll('[id^="m-"]').forEach(m=>m.style.display='none');return false}
+function submitAll(){closeMask();try{const all=JSON.parse(localStorage.getItem('demo-records')||'[]');all.push({who:[$('f-class').value,$('f-seat').value,$('f-name').value].join(' '),course:course.name,answers,at:Date.now()});localStorage.setItem('demo-records',JSON.stringify(all))}catch(e){}
+  location.hash=course.group?'#K07-Group':'#K07-Done';return false}
+// 小組
+function fillGroup(){const mine=course.aspects.map(a=>answers[a.k]).filter(Boolean).join('、')||'（還沒填）';
+  const img=photoURL?`<img src="${photoURL}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" alt="">`:'<span style="font-size:40px">🪨</span>';
+  $('d-gphoto').textContent='用'+myName()+'的照片';$('d-thumbs').innerHTML=fill(TPL.tile,{n:myName(),img})+course.members.slice(0,2).map(m=>fill(TPL.tile_off,{n:m[0],img:'<span style="font-size:40px">🪨</span>'})).join('');
+  $('d-mlist').innerHTML=[[myName()+'（我）',mine],...course.members].map(m=>fill(TPL.line,{n:m[0],t:m[1]})).join('')}
+function selThumb(b){document.querySelectorAll('#d-thumbs button').forEach(x=>x.style.boxShadow='0 0 0 3px #e0cdb8');b.style.boxShadow='0 0 0 4px #22a05a'}
+</script>
+</body></html>
